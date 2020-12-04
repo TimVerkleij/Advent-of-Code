@@ -958,6 +958,7 @@ byr:1971
 ecl:brn eyr:2024
 `
 
+console.time("timer")
 
 let array = input.split("\n\n")
 
@@ -1028,4 +1029,6 @@ passports.forEach((value, index, array) => {
     }
 })
 
+
+console.timeEnd("timer")
 console.log(totalValidPassports)
