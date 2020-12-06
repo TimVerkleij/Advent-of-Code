@@ -2177,22 +2177,6 @@ iohnmfyvatsblzxqpecg
 gbie
 zi`
 
-// input = `abc
-
-// a
-// b
-// c
-
-// ab
-// ac
-
-// a
-// a
-// a
-// a
-
-// b`
-
 
 input = input.split("\n\n")
 console.time("timer")
@@ -2204,18 +2188,15 @@ input.forEach(group => {
 
     let answers = []
     members = group.split("\n")
+
     members.forEach(member => {
         answers.push(member)
-
-
-        // for (let i = 0; i < member.length; i++) {
-        //     const answer = member[i];
-
-        // }
     });
-    if(answers.length === 1){
+
+    if (answers.length === 1) {
         totalCount = totalCount + answers[0].length
     }
+
     for (let i = 1; i < answers.length; i++) {
         let answer = answers[i];
         for (let j = 0; j < answers[0].length; j++) {
@@ -2223,19 +2204,15 @@ input.forEach(group => {
             if (answer.includes(letter)) {
                 if (letterObj.hasOwnProperty(letter)) {
                     letterObj[letter] = letterObj[letter] + 1
-
                 } else {
                     letterObj[letter] = 2
                 }
             }
         }
     }
-    // console.log("----")
+
     Object.entries(letterObj).forEach(entry => {
-        // console.log(entry)
-        // console.log(members.length)
-        if(entry[1] === members.length){
-            // console.log("added 1")
+        if (entry[1] === members.length) {
             totalCount++
         }
     })
