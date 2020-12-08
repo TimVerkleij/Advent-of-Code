@@ -660,7 +660,13 @@ let indiciesForNopOrJmp = []
 let looped = false
 
 for (let j = 0; j < input.length; j++) {
+
+
     const element = input[j];
+
+    if(element[0] === "acc"){
+        continue;
+    }
 
     acc = 0
     history = []
