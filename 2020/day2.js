@@ -2,6 +2,9 @@ let input = ["5-9 g: ggccggmgn", "11-16 l: llllqllllllllflq", "3-6 q: qvqqqpzqd"
 
 let count = 0
 
+console.time("timer")
+
+
 input.forEach(loop)
 
 
@@ -11,10 +14,11 @@ function loop(value, index, array) {
 	let occurences = parts[2].split(parts[1]).length-1
 	let min = parts[0].split("-")[0]
 	let max = parts[0].split("-")[1]
-	console.log(value, min + "-" + max, occurences)
+	// console.log(value, min + "-" + max, occurences)
 	if(occurences >= min && occurences <= max){
 		count++
 	}
 }
 
+console.timeEnd("timer")
 console.log(count)
