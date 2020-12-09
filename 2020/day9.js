@@ -1000,8 +1000,7 @@ input = `36
 110229764357255`
 
 
-
-input = input.split("\n").map( x => {
+input = input.split("\n").map(x => {
     return parseInt(x)
 })
 
@@ -1017,21 +1016,22 @@ for (let i = 25; i < input.length; i++) {
         const numbers = input[j];
         for (let k = i - 25; k < i; k++) {
             const element = input[k];
-            if(element + numbers === number){
+            if (element + numbers === number) {
                 found = true
                 break
             }
-            
+
         }
 
-        if(found){
+        if (found) {
             break
         }
     }
-    if(found){
+    if (found) {
         continue;
-    } else{
+    } else {
         console.log(number)
+        break
     }
 }
 
