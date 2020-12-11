@@ -868,7 +868,9 @@ BFFBFBBLLL
 FBFBFFBRRR
 FFBBBBBRRR`
 
-console.time("initialization")
+const { PerformanceObserver, performance } = require('perf_hooks');
+
+let t0 = performance.now() 
 
 input = input.split("\n").map(n => {
     let string = ""
@@ -887,7 +889,9 @@ input = input.split("\n").map(n => {
     return parseInt(string, 2)
 }).sort((a, b) => b - a)
 
-console.timeEnd("initialization")
 
 console.log(input[0])
 
+
+let t1 = performance.now()
+console.log(t1 - t0 + " ms")
