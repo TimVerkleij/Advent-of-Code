@@ -1004,8 +1004,11 @@ input = input.split("\n").map(x => {
     return parseInt(x)
 })
 
-console.time("timer")
+const { type } = require('os');
+// console.time("timer")
+const {PerformanceObserver, performance} = require('perf_hooks');
 
+let t0 = performance.now()
 
 let found = false
 
@@ -1035,4 +1038,8 @@ for (let i = 25; i < input.length; i++) {
     }
 }
 
-console.timeEnd("timer")
+// console.timeEnd("timer")
+
+let t1 = performance.now()
+
+console.log(t1 - t0 + " ms")
