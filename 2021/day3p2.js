@@ -1000,29 +1000,47 @@ let input = `111011001010
 100110100000`
 
 
-
+let input2 = input.split("\n")
 input = input.split("\n")
 
-let gammaRate = ""
-
-for (let i = 0; i < 12; i++) {
-    let amountOfOnes = 0
-    let amountOfZeros = 0
-    for (let j = 0; j < input.length; j++) {
-        const binairy = input[j];
-        if (binairy[i] === "1") {
-            amountOfOnes++
+function calculateLifeSupportRating(firstRun) {
+    for (let i = 0; i < 12; i++) {
+        let amountOfOnes = 0
+        let amountOfZeros = 0
+        for (let j = 0; j < input.length; j++) {
+            const binairy = input[j];
+            if (binairy[i] === "1") {
+                amountOfOnes++
+            } else {
+                amountOfZeros++
+            }
+        }
+    
+        if(firstRun){
+            if (amountOfZeros <= amountOfOnes) {
+                input = input.filter(number => { return number[i] === "1" })
+            } else {
+                input = input.filter(number => { return number[i] === "0" })
+            }
         } else {
-            amountOfZeros++
+            if (amountOfZeros <= amountOfOnes) {
+                input = input.filter(number => { return number[i] === "0" })
+            } else {
+                input = input.filter(number => { return number[i] === "1" })
+            }
+        }
+        if(input.length === 1) {
+            console.log(input[0])
         }
     }
-    if (amountOfZeros > amountOfOnes) {
-        gammaRate += "0"
-    } else {
-        gammaRate += "1"
-    }
 
+    if(firstRun) {
+        input = input2
+        calculateLifeSupportRating(false)
+    }
 }
 
-let epsilonRate = gammaRate.split("").map(bit => { if (bit === "1") { return "0" } else { return "1" } }).join("")
-console.log(parseInt(epsilonRate, 2) * parseInt(gammaRate, 2))
+
+calculateLifeSupportRating(true)
+
+console.log(parseInt('110000010001', 2) * parseInt('000100000001', 2))
