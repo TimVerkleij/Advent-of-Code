@@ -344,7 +344,7 @@ for (let i = 0; i < input.length; i++) {
             }
         }
     }
-    console.log(output.join(""))
+    // console.log(output.join(""))
     // console.log(total)
     total += parseInt(output.join(""))
 }
