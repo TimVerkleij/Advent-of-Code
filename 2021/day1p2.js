@@ -2001,6 +2001,10 @@ let input = `178
 
 input = input.split("\n")
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 let totalIncreases = 0
 for (let i = 0; i < input.length; i++) {
     const measurement = parseInt(input[i])
@@ -2010,7 +2014,9 @@ for (let i = 0; i < input.length; i++) {
     }
 }
 
+let t1 = performance.now()
 console.log(totalIncreases)
+console.log(t1 - t0 + " ms")
 
 //! Python code
 // totalIncreases = 0

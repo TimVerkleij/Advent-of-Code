@@ -1001,6 +1001,10 @@ forward 2`
 
 input = input.split("\n")
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 let submarine = { x: 0, y: 0, aim: 0 }
 
 for (let i = 0; i < input.length; i++) {
@@ -1017,4 +1021,7 @@ for (let i = 0; i < input.length; i++) {
     }
 }
 
+let t1 = performance.now()
+
 console.log(submarine.x * submarine.y)
+console.log(t1 - t0 + " ms")

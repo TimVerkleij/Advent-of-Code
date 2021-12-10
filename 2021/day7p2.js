@@ -2,6 +2,10 @@ let input = `1101,1,29,67,1102,0,1,65,1008,65,35,66,1005,66,28,1,67,65,20,4,0,10
 // input = `16,1,2,0,4,2,7,1,2,14`
 input = input.split(",").map(num => { return parseInt(num) }).sort((a, b) => a - b)
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 let highestNumber = Math.max.apply(null, input)
 
 let outcomes = []
@@ -31,4 +35,8 @@ function calculateFuelConsumption(number) {
 
 outcomes.sort((a, b) => a.totalFuel - b.totalFuel)
 
+let t1 = performance.now()
+
 console.log(outcomes[0])
+
+console.log(t1 - t0 + " ms")

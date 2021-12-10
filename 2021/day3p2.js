@@ -1003,6 +1003,10 @@ let input = `111011001010
 let input2 = input.split("\n")
 input = input.split("\n")
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+let outputs = []
 function calculateLifeSupportRating(firstRun) {
     for (let i = 0; i < 12; i++) {
         let amountOfOnes = 0
@@ -1030,7 +1034,7 @@ function calculateLifeSupportRating(firstRun) {
             }
         }
         if(input.length === 1) {
-            console.log(input[0])
+            outputs.push(input[0])
         }
     }
 
@@ -1042,5 +1046,8 @@ function calculateLifeSupportRating(firstRun) {
 
 
 calculateLifeSupportRating(true)
+let t1 = performance.now()
 
-console.log(parseInt('110000010001', 2) * parseInt('000100000001', 2))
+console.log(parseInt(outputs[0], 2) * parseInt(outputs[1], 2))
+
+console.log(t1 - t0 + " ms")

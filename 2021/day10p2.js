@@ -106,6 +106,11 @@ let input = `[{{{{{<([({{<[<>()][{}()]>{<{}{}>{[]{}}}}{({{}{}][<>{}])(<<>()><{}<
 
 
 input = input.split("\n")
+
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 let brackets = {"]": 0, "}": 0, ")": 0, ">": 0}
 let bracketValues = [")", "]", "}", ">"]
 let output = []
@@ -150,5 +155,9 @@ for (let i = 0; i < input.length; i++) {
     }
 
 }
+
+let t1 = performance.now()
+
 output = output.sort((a,b) => a - b)
 console.log(output[Math.floor(output.length / 2)])
+console.log(t1 - t0 + " ms")

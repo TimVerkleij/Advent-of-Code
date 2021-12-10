@@ -1003,6 +1003,10 @@ let input = `111011001010
 
 input = input.split("\n")
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 let gammaRate = ""
 
 for (let i = 0; i < 12; i++) {
@@ -1025,4 +1029,10 @@ for (let i = 0; i < 12; i++) {
 }
 
 let epsilonRate = gammaRate.split("").map(bit => { if (bit === "1") { return "0" } else { return "1" } }).join("")
+
+let t1 = performance.now()
+
+
 console.log(parseInt(epsilonRate, 2) * parseInt(gammaRate, 2))
+
+console.log(t1 - t0 + " ms")

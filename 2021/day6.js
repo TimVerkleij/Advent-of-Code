@@ -2,6 +2,10 @@ let input = `5,1,1,5,4,2,1,2,1,2,2,1,1,1,4,2,2,4,1,1,1,1,1,4,1,1,1,1,1,5,3,1,4,1
 
 input = input.split(",").map(fish => { return parseInt(fish) })
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 for (let i = 0; i < 80; i++) {
     let newBornFishAmount = 0
     for (let j = 0; j < input.length; j++) {
@@ -17,4 +21,7 @@ for (let i = 0; i < 80; i++) {
     Array.prototype.push.apply(input, newFish)
 }
 
+let t1 = performance.now()
+
 console.log(input.length)
+console.log(t1 - t0 + " ms")

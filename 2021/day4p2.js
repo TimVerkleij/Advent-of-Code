@@ -600,6 +600,9 @@ let input = `90,4,2,96,46,1,62,97,3,52,7,35,50,28,31,37,74,26,59,53,82,47,83,80,
 33 95 72 59 42
 94 43 51 20 60`
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+
 let numbers = input.split("\n", 1)[0].split(",")
 let boards = input.split(/\n/)
 boards.shift()
@@ -614,6 +617,9 @@ boards = boards.map(board => {
     board = board.replace(/, /g, ',')
     return board.split(",").map(row => { return row.split(" ") })
 })
+
+let t0 = performance.now()
+
 
 let boardsThatHaveWon = new Set()
 
@@ -687,3 +693,8 @@ function calculateAnswer(board, number) {
         console.log(total * number)
     }
 }
+
+let t1 = performance.now()
+
+console.log(t1 - t0 + " ms")
+

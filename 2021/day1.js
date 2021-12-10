@@ -1999,7 +1999,13 @@ let input = `178
 8753
 8755`
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+
 input = input.split("\n")
+
+let t0 = performance.now()
+
 
 let lastMeasurement
 let totalIncreases = 0
@@ -2013,8 +2019,11 @@ for (let i = 0; i < input.length; i++) {
     lastMeasurement = measurement
 }
 
+
+let t1 = performance.now()
 console.log(totalIncreases)
 
+console.log(t1 - t0 + " ms")
 
 //! Python code that gives the correct answer
 // lastMeasurement = 0

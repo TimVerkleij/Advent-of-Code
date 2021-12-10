@@ -106,6 +106,11 @@ let input = `1012349767989212989898755567989899469867895798763210134789998765323
 // 9899965678`
 
 input = input.split("\n").map(row => { return row.split("").map(height => { return parseInt(height) }) })
+
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 let total = 1
 let basins = []
 for (let i = 0; i < input.length; i++) {
@@ -145,5 +150,9 @@ function getAdjacentLocations(x, y) {
     return { up, down, left, right }
 }
 
+let t1 = performance.now()
+
+
 basins.sort((a,b) => b - a)
 console.log(basins[0] * basins[1] * basins[2])
+console.log(t1 - t0 + " ms")

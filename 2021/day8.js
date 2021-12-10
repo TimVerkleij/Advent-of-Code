@@ -201,6 +201,10 @@ dabfegc dfegb cbgf cf fdebgc dcbaef gcfed adecg fbdgea fce | cf gbfc fgcb begcad
 
 input = input.split("\n").map( v => {return v.split("| ")[1].split(" ")})
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 let lengths = [2, 3, 4, 7]
 let total = 0
 for (let i = 0; i < input.length; i++) {
@@ -213,4 +217,8 @@ for (let i = 0; i < input.length; i++) {
     }
 }
 
+let t1 = performance.now()
+
 console.log(total)
+
+console.log(t1 - t0 + " ms")

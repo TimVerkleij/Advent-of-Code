@@ -508,6 +508,10 @@ input = input.split("\n").map(line => {
     })
 })
 
+const {PerformanceObserver, performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
 let grid = []
 
 for (let i = 0; i < input.length; i++) {
@@ -637,4 +641,8 @@ for (let i = 0; i < grid.length; i++) {
     }
 }
 
+let t1 = performance.now()
+
 console.log(total)
+
+console.log(t1 - t0 + " ms")
