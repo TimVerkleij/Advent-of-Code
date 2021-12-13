@@ -843,6 +843,11 @@ fold along y=6`
 input = input.split("\n").map(value => { return value.split(",").map(value2 => {return parseInt(value2)}) })
 folds = folds.split("\n").map(value => { return value.split(" ")[2].split("=") })
 
+const {performance} = require('perf_hooks');
+
+let t0 = performance.now()
+
+
 for (let i = 0; i < 1; i++) {
     const fold = folds[i];
     let foldAxis = (fold[0] === "x") ? 0 : 1;
@@ -857,7 +862,13 @@ for (let i = 0; i < 1; i++) {
     })
 }
 
+
 let set = new Set()
 
 input.forEach(value => set.add(value.toString()))
+
+let t1 = performance.now()
+
 console.log(set.size)
+
+console.log(t1 - t0 + " ms")
