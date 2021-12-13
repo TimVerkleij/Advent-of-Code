@@ -840,7 +840,7 @@ fold along y=13
 fold along y=6`
 
 
-input = input.split("\n").map(value => { return value.split(",") })
+input = input.split("\n").map(value => { return value.split(",").map(value2 => {return parseInt(value2)}) })
 folds = folds.split("\n").map(value => { return value.split(" ")[2].split("=") })
 
 for (let i = 0; i < 1; i++) {
@@ -848,11 +848,16 @@ for (let i = 0; i < 1; i++) {
     let foldAxis = (fold[0] === "x") ? 0 : 1;
     input.map(dot => {
         if (dot[foldAxis] < fold[1]) {
-            console.log(dot + "!")
+            // console.log(dot + "!")
             return dot
         }
-        dot[foldAxis] -= dot[foldAxis] - fold[1]
-        console.log(dot)
+        dot[foldAxis] -= (dot[foldAxis] - fold[1])*2
+        // console.log(dot)
         return dot
     })
 }
+
+let set = new Set()
+
+input.forEach(value => set.add(value.toString()))
+console.log(set.size)
