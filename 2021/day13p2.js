@@ -887,8 +887,9 @@ set.forEach(value => {
     output[value[1]][value[0]] = "*"
 })
 
+let t1 = performance.now()
+
 output.forEach(value => {console.log(value.join(""))})
 
-let t1 = performance.now()
 
 console.log(t1 - t0 + " ms")
