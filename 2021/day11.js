@@ -27,21 +27,30 @@ for (let y = 0; y < input.length; y++) {
 function addOneToSurroundingOctopuses(x, y) {
     let topL, topM, topR, botL, botM, botR
     if (y - 1 >= 0) {
-        topL = ++input[y - 1][x - 1]
-        topM = ++input[y - 1][x]
-        topR = ++input[y - 1][x + 1]
+        console.log(input[y - 1][x - 1])
+        input[y - 1][x - 1]++
+        console.log(input[y - 1][x - 1])
+        console.log(input[y - 1][x])
+        input[y - 1][x] += 1
+        console.log(input[y - 1][x])
+        console.log(input[y])
+        // input[y - 1][x + 1] += 1
+
+        topL = input[y - 1][x - 1]
+        topM = input[y - 1][x]
+        topR = input[y - 1][x + 1]
     }
 
-    console.log(input[y])
-    input[y][x - 1]++
-    input[y][x + 1]++
+    // console.log(input[y])
+    // input[y][x - 1]++
+    // input[y][x + 1]++
     let midL = input[y][x - 1]
     let midR = input[y][x + 1]
 
     if (y + 1 <= 9) {
-        botL = ++input[y + 1][x - 1]
-        botM = ++input[y + 1][x]
-        botR = ++input[y + 1][x + 1]
+        botL = input[y + 1][x - 1]
+        botM = input[y + 1][x]
+        botR = input[y + 1][x + 1]
     }
 
 
@@ -61,13 +70,13 @@ function addOneToSurroundingOctopuses(x, y) {
         addOneToSurroundingOctopuses(x - 1, y)
     }
     if (botL == 9) {
-        addOneToSurroundingOctopuses(x - 1, y - 1)
+        addOneToSurroundingOctopuses(x - 1, y + 1)
     }
     if (botM == 9) {
-        addOneToSurroundingOctopuses(x, y - 1)
+        addOneToSurroundingOctopuses(x, y + 1)
     }
     if (botR == 9) {
-        addOneToSurroundingOctopuses(x + 1, y - 1)
+        addOneToSurroundingOctopuses(x + 1, y + 1)
     }
 }
 console.log(input)
