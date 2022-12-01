@@ -2254,6 +2254,12 @@ input = `6758
 2180
 4254`
 
+const t0 = performance.now()
+
 const elves = input.split('\n\n').map(food => food.split('\n').reduce((a, b) => parseInt(a)+parseInt(b)))
 const sortedElves = elves.sort((a, b) => b - a)
+
+const t1 = performance.now()
+
 console.log(sortedElves[0])
+console.log(`Total time taken: ${t1 - t0}ms`)
