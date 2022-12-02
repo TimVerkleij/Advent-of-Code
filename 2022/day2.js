@@ -2499,6 +2499,7 @@ A Z
 A X
 B Z`
 
+const t0 = performance.now()
 let rounds = input.split('\n').map(x => x.split(' '))
 
 // const dictionalary = {
@@ -2521,4 +2522,7 @@ let count = 0
 rounds.forEach(move => {
    count += dictionalary[move[0]][move[1]] + scores[move[1]] 
 })
+const t1 = performance.now()
+
 console.log(count)
+console.log(`Total time: ${t1 - t0}ms`)
