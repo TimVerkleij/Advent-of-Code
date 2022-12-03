@@ -299,6 +299,8 @@ hhPzDzPhPNbfpzhBbdNbDhttzqWtwttHWwntjqmwmWFm
 LgGZSdMMrgTLrZLdgLSgsGTFFjrWtFFmmmFtWjqHFnFtjn
 vZgdLvZLZQLRQZQQdMZLdQvVpRhNNPfJDbcBbbhVNJNNhf`
 
+const t0 = performance.now()
+
 rucksacks = input.split('\n').map(items => {
     const halfpoint = items.length / 2
     return [items.slice(0, halfpoint), items.slice(-halfpoint)]
@@ -315,4 +317,8 @@ rucksacks.forEach(rucksack => {
         }
     }
 })
+
+const t1 = performance.now()
+
 console.log(sum)
+console.log(`Total time taken: ${t1 - t0}ms`)
