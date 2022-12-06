@@ -3,11 +3,10 @@ input = `stftmtvvtvqqczqqnjnwwlqqdzdnnsvnsswbbwsstvvssfjsjbjfjmjpjzpplpppjzjqqdz
 const t0 = performance.now()
 let t1
 
-for (let i = 4; i < input.length; i++) {
-    // const letter = input[i];
-    const possibleMarker = input.slice(i - 4, i)
+for (let i = 14; i < input.length; i++) {
+    const possibleMarker = input.slice(i - 14, i)
     const removeDuplicates = [...new Set(possibleMarker)]
-    if(removeDuplicates.length === 4) {
+    if(removeDuplicates.length === 14) {
         t1 = performance.now()
         console.log(i)
         break
