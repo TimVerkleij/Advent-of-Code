@@ -990,6 +990,7 @@ $ cd ztrz
 $ ls
 187968 fzjdz.thw`
 
+const {performance} = require('perf_hooks');
 const t0 = performance.now()
 const commands = input.split('\n')
 

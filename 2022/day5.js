@@ -513,6 +513,7 @@ move 4 from 5 to 4
 move 8 from 8 to 7
 move 1 from 3 to 9`
 
+const {performance} = require('perf_hooks');
 const t0 = performance.now()
 
 let [crates, moves] = input.split('\n\n')

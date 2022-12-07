@@ -2254,6 +2254,7 @@ input = `6758
 2180
 4254`
 
+const {performance} = require('perf_hooks');
 const t0 = performance.now()
 
 const elves = input.split('\n\n').map(food => food.split('\n').reduce((a, b) => parseInt(a)+parseInt(b)))

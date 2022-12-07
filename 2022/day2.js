@@ -2499,6 +2499,7 @@ A Z
 A X
 B Z`
 
+const {performance} = require('perf_hooks');
 const t0 = performance.now()
 let rounds = input.split('\n').map(x => x.split(' '))
 

@@ -999,6 +999,7 @@ input = `7-50,8-33
 41-98,41-97
 1-99,2-98`
 
+const {performance} = require('perf_hooks');
 const t0 = performance.now()
 const pairs = input.split('\n').map(pair => pair.split(',').map(range => range.split('-').map(number => parseInt(number))))
 
