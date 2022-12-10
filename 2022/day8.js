@@ -98,56 +98,70 @@ input = `30120133133303002400215113411554544152551005341032102464322330425325142
 001233231400214434040102054514026055053336624361305231213331535242260044242320014551114014133012203
 013221201313013142535111451534205341402225520043535003305340330410530234344250234251433044340323003`
 
-const grid = input.split('\n').map(row => row.split('').map(value => parseInt(value)))
+// input = `30373
+// 25512
+// 65332
+// 33549
+// 35390`
 
+const grid = input.split('\n').map(row => row.split('').map(value => parseInt(value)))
+const newGrid = []
 let sum = 0
 for (let y = 0; y < grid.length; y++) {
     const row = grid[y];
-    for (let x = 0; x < row.length; x++) {
+        let string = ''
+        for (let x = 0; x < row.length; x++) {
         const curentTree = row[x];
         if(checkNorth(x, y - 1, curentTree) || checkSouth(x, y + 1, curentTree) || checkEast(x + 1, y, curentTree) || checkWest(x - 1, y, curentTree)) {
             sum++
+            string += '.'
+        } else {
+            string += 'X'
         }
     }
+    newGrid.push(string)
 }
 
 console.log(sum)
-
+console.log(input)
+newGrid.forEach(row => console.log(row))
 function checkNorth(x, y, height) {
-    if(!grid[y]?.[x]) {
+    if(grid[y]?.[x] === undefined) {
         return true
     }
-    if(grid[y][x] <= height) {
+    // console.log(grid[y][x] >= height, grid[y][x], height)
+    if(grid[y][x] >= height) {
         return false
     }
+    // console.log('continue')
     return checkNorth(x, y - 1, height)
 }
 
 function checkSouth(x, y, height) {
-    if(!grid[y]?.[x]) {
+    if(grid[y]?.[x] === undefined) {
         return true
     }
-    if(grid[y][x] <= height) {
+    if(grid[y][x] >= height) {
         return false
     }
     return checkSouth(x, y + 1, height)
 }
 
 function checkEast(x, y, height) {
-    if(!grid[y]?.[x]) {
+    if(grid[y]?.[x] === undefined) {
         return true
     }
-    if(grid[y][x] <= height) {
+    if(grid[y][x] >= height) {
         return false
     }
     return checkEast(x + 1, y, height)
 }
 
 function checkWest(x, y, height) {
-    if(!grid[y]?.[x]) {
+    if(grid[y]?.[x] === undefined) {
         return true
     }
-    if(grid[y][x] <= height) {
+    if(grid[y][x] >= height) {
         return false
     }
     return checkWest(x - 1, y, height)
