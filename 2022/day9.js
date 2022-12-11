@@ -1999,6 +1999,9 @@ U 10
 L 7
 U 1`
 
+const {performance} = require('perf_hooks')
+const t0 = performance.now()
+
 moves = input.split('\n').map(move => move.split(' '))
 
 const headPosition = { x: 0, y: 0 }
@@ -2008,10 +2011,9 @@ const visited = new Set()
 moves.forEach(move => {
     for (let i = 0; i < move[1]; i++) {
         moveHead(move[0])
-
-        // visited.add(`${headPosition.x},${headPosition.y}`)
+        moveTail()
+        visited.add(`${tailPosition.x},${tailPosition.y}`)
     }
-    moveHead(move[0])
 })
 
 function moveHead(direction) {
@@ -2033,12 +2035,20 @@ function moveTail() {
     const horizontalDifference = Math.abs(headPosition.x - tailPosition.x)
     const verticalDifference = Math.abs(headPosition.y - tailPosition.y)
 
-    // Move diagonally if needed
     if((horizontalDifference === 2 && verticalDifference !== 0) || (horizontalDifference !== 0 && verticalDifference === 2)) {
         const horizontalDirection = headPosition.x - tailPosition.x > 0 ? 1 : -1
         const verticalDirection = headPosition.y - tailPosition.y > 0 ? 1 : -1
         tailPosition.x += horizontalDirection
         tailPosition.y += verticalDirection
+    } else if (horizontalDifference === 2) {
+        const horizontalDirection = headPosition.x - tailPosition.x > 0 ? 1 : -1
+        tailPosition.x += horizontalDirection
+    } else if (verticalDifference === 2) {
+        const verticalDirection = headPosition.y - tailPosition.y > 0 ? 1 : -1
+        tailPosition.y += verticalDirection
     }
 }
-console.log(headPosition)
+
+const t1 = performance.now()
+console.log(visited.size)
+console.log(`Total time taken: ${t1 - t0}ms`)
