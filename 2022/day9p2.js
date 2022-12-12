@@ -2004,34 +2004,40 @@ const t0 = performance.now()
 
 moves = input.split('\n').map(move => move.split(' '))
 
-const headPosition = { x: 0, y: 0 }
-const tailPosition = { x: 0, y: 0 }
+// const headPosition = { x: 0, y: 0 }
+// const tailPosition = { x: 0, y: 0 }
+const rope = {}
+for (let i = 0; i < 10; i++) {
+    rope[`${i}`] = { x: 0, y: 0}
+}
 const visited = new Set()
 
 moves.forEach(move => {
     for (let i = 0; i < move[1]; i++) {
         moveHead(move[0])
-        moveTail()
-        visited.add(`${tailPosition.x},${tailPosition.y}`)
+        for (let j = 0; j < 9; j++) {
+            moveTail(rope[`${j}`], rope[`${j+1}`])
+        }
+        visited.add(`${rope['9'].x},${rope['9'].y}`)
     }
 })
 
 function moveHead(direction) {
     if(direction === 'U') {
-        headPosition.y++
+        rope[`0`].y++
     }
     if(direction === 'D') {
-        headPosition.y--
+        rope[`0`].y--
     }
     if(direction === 'L') {
-        headPosition.x--
+        rope[`0`].x--
     }
     if(direction === 'R') {
-        headPosition.x++
+        rope[`0`].x++
     }
 }
 
-function moveTail() {
+function moveTail(headPosition, tailPosition) {
     const horizontalDifference = Math.abs(headPosition.x - tailPosition.x)
     const verticalDifference = Math.abs(headPosition.y - tailPosition.y)
 
@@ -2050,6 +2056,5 @@ function moveTail() {
 }
 
 const t1 = performance.now()
-// console.log(visited.size)
-console.log('unfinished')
+console.log(visited.size)
 console.log(`Total time taken: ${t1 - t0}ms`)
