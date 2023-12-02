@@ -4,7 +4,7 @@ const text = fs.readFileSync('input.txt', 'utf-8')
 
 let sum = 0
 
-text.split('\r\n').forEach(line => {
+text.split('\n').forEach(line => {
     let [gameID, results] = line.split(': ')
     gameID = gameID.replace('Game ', '')
 
