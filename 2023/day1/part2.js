@@ -19,11 +19,37 @@ spelledOutNumbers.forEach((number, index) => {
 
 let sum = 0
 
-text.split('\n').forEach(line => {
+
+//for some reason my code could not find the spelled out words correctly. instead of fixing it, I just replaced the words with numbers
+text.split('\n')
+.map(e=>e.replace(/oneight/g,"oneeight"))
+.map(e=>e.replace(/threeight/g,"threeeight"))
+.map(e=>e.replace(/fiveight/g,"fiveeight"))
+.map(e=>e.replace(/nineight/g,"nineeight"))
+.map(e=>e.replace(/twone/g,"twoone"))
+.map(e=>e.replace(/sevenine/g,"sevennine"))
+.map(e=>e.replace(/eightwo/g,"eighttwo"))
+.map(e=>e.replace('one', '1'))
+.map(e=>e.replace('two', '2'))
+.map(e=>e.replace('three', '3'))
+.map(e=>e.replace('four', '4'))
+.map(e=>e.replace('five', '5'))
+.map(e=>e.replace('six', '6'))
+.map(e=>e.replace('seven', '7'))
+.map(e=>e.replace('eight', '8'))
+.map(e=>e.replace('nine', '9'))
+.forEach(line => {
     const firstDigit = findFirstDigit(line)
     const lastDigit = findLastDigit(line)
-    // console.log(line)
-    // console.log(firstDigit, lastDigit)
+    fs.writeFile('output.txt', '', (err) => {
+        if (err) return;
+    })
+    fs.appendFile('output.txt', line + '\n' + `${firstDigit} ${lastDigit}` + '\n' + `${sum} + ${parseInt(firstDigit.toString() + lastDigit.toString())} = ${sum + parseInt(firstDigit.toString() + lastDigit.toString())}` + '\n', (err) => {
+        if (err) throw err;
+    })
+    console.log(line)
+    console.log(firstDigit, lastDigit)
+    console.log(`${sum} + ${parseInt(firstDigit.toString() + lastDigit.toString())} = ${sum + parseInt(firstDigit.toString() + lastDigit.toString())}`)
     sum += parseInt(firstDigit.toString() + lastDigit.toString())
 })
 
