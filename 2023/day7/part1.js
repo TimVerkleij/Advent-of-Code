@@ -52,49 +52,27 @@ const sortString = (string) => string.split('').sort().join('')
 
 // console.log(hands)
 hands.forEach(hand => {
+    let cardType = ''
     if (types.fiveOfaKind.match.test(hand.cards)) {
-        // console.log(hand.cards)
-        types.fiveOfaKind.hands.push({
-            cards: hand.cards,
-            bid: hand.bid
-        })
+        cardType = 'fiveOfaKind'
     } else if (types.fourOfaKind.match.test(sortString(hand.cards))) {
-        // console.log(hand.cards)
-        types.fourOfaKind.hands.push({
-            cards: hand.cards,
-            bid: hand.bid
-        })
+        cardType = 'fourOfaKind'
     } else if (matchFullHouse(hand.cards)) {
-        // console.log(hand.cards)
-        types.fullHouse.hands.push({
-            cards: hand.cards,
-            bid: hand.bid
-        })
+        cardType = 'fullHouse'
     } else if (types.threeOfaKind.match.test(sortString(hand.cards))) {
-        // console.log(hand.cards)
-        types.threeOfaKind.hands.push({
-            cards: hand.cards,
-            bid: hand.bid
-        })
+        cardType = 'threeOfaKind'
     } else if (matchTwoPair(hand.cards)) {
-        // console.log(hand.cards)
-        types.twoPair.hands.push({
-            cards: hand.cards,
-            bid: hand.bid
-        })
+        cardType = 'twoPair'
     } else if (matchOnePair(hand.cards)) {
-        // console.log(hand.cards)
-        types.onePair.hands.push({
-            cards: hand.cards,
-            bid: hand.bid
-        })
+        cardType = 'onePair'
     } else if (new Set(hand.cards.split('')).size === 5) {
-        // console.log(hand.cards)
-        types.highCard.hands.push({
-            cards: hand.cards,
-            bid: hand.bid
-        })
+        cardType = 'highCard'
     }
+
+    types[cardType].hands.push({
+        cards: hand.cards,
+        bid: hand.bid
+    })
 })
 
 
@@ -156,13 +134,9 @@ Object.keys(types).reverse().forEach(type => {
 console.log(sum)
 
 function replaceCardsWithValues(string) {
-    // console.log(string)
-
     const array = string.split('').map(card => {
         return parseInt(cardValues[card] || card)
     })
 
-    // console.log(array)
     return array
-    // return string.split(search).join(replace);
 }
