@@ -50,7 +50,6 @@ let types = {
 
 const sortString = (string) => string.split('').sort().join('')
 
-// console.log(hands)
 hands.forEach(hand => {
     let cardType = ''
     if (types.fiveOfaKind.match.test(hand.cards)) {
@@ -110,7 +109,6 @@ let sum = 0
 let i = 1
 
 Object.keys(types).reverse().forEach(type => {
-    // console.log(`${type}: ${types[type].hands.length}`)
     types[type].hands.sort((a, b) => {
         let aCards = replaceCardsWithValues(a.cards)
         let bCards = replaceCardsWithValues(b.cards)
@@ -121,8 +119,6 @@ Object.keys(types).reverse().forEach(type => {
             return aCards[index] - bCards[index]
         }
     })
-
-    console.log(types[type].hands)
 
     types[type].hands.forEach(hand => {
         sum += parseInt(hand.bid * i)
