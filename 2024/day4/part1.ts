@@ -108,5 +108,3 @@ function findNextLetter(
 
 	return total;
 }
-
-// refs/remotes/origin/OFK-4936/new-transaction-service
