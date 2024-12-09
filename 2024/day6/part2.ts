@@ -11,6 +11,11 @@ const input = await Bun.file("./input.txt").text();
 // #.........
 // ......#...`;
 
+exit();
+
+function exit() {
+	process.exit(1);
+}
 const pos = {
 	x: 0,
 	y: 0,
@@ -37,9 +42,13 @@ const total = 0;
 move(pos.x, pos.y, "N");
 console.log(total);
 
-map.map((x) => {
-	console.log(x.join(""));
-});
+// for (const obstacle of obstaclePositions) {
+// 	map[obstacle[1]][obstacle[0]] = "O";
+// }
+
+// map.map((x) => {
+// 	console.log(x.join(""));
+// });
 
 function move(x: number, y: number, direction: direction) {
 	const currentTile = map[y][x];
@@ -56,8 +65,42 @@ function move(x: number, y: number, direction: direction) {
 		map[y][x] = newDirection;
 		return move(x, y, newDirection);
 	}
+	const worker = new Worker("./worker.ts");
+	const newDirection = turn90Degrees(direction);
+	worker.postMessage({ x, y, newDirection });
+
+	worker.onmessage = (event) => {
+		console.log(event);
+		worker.terminate();
+	};
+	// if (findLoop(x, y, turn90Degrees(direction))) {
+	// 	total++;
+	// }
 
 	return move(
+		x + transmutations[direction].x,
+		y + transmutations[direction].y,
+		direction,
+	);
+}
+
+export function findLoop(x: number, y: number, direction: direction) {
+	const tile = map[y]?.[x];
+	if (tile === direction) {
+		return true;
+	}
+	if (tile === "#") {
+		const newDirection = turn90Degrees(direction);
+		return findLoop(
+			x - transmutations[direction].x,
+			y - transmutations[direction].y,
+			newDirection,
+		);
+	}
+	if (tile === undefined) {
+		return false;
+	}
+	return findLoop(
 		x + transmutations[direction].x,
 		y + transmutations[direction].y,
 		direction,
