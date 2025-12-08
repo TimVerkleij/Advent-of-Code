@@ -1,44 +1,39 @@
 let input = await Bun.file('./input.txt').text()
 
-input = `987654321111111
-811111111111119
-234234234234278
-818181911112111`
+// input = `987654321111111
+// 811111111111119
+// 234234234234278
+// 818181911112111`
 
 const banks = input.split('\n')
 
 let sum = 0
 
+const findIndexOfBiggestDigit = (searchString: string, isSecondDigit: boolean = false) => {
+    let index: number = -1
+    let searchDigit = 9
+    while (searchDigit > 0) {
+        index = searchString.indexOf(searchDigit.toString())
+        if (index === -1 || (index === searchString.length - 1 && !isSecondDigit)) {
+            searchDigit--
+            continue
+        }
+        break
+    }
+    return index
+}
+
 for (const bank of banks) {
 
-    const max = {
-        previousFirst: 0,
-        previousSecond: 0,
-        first: 0,
-        second: 0
-    }
+    const index = findIndexOfBiggestDigit(bank)
 
-    for (let dig of bank) {
-        let num = +dig
-        if (max.first < num) {
-            max.previousFirst = max.first
-            max.first = num
+    const firstDigit = +bank[index]
 
-            max.previousSecond = max.second
-            max.second = 0
-        } else if (max.second < num) {
-            max.previousSecond = max.second
-            max.second = num
-        }
-    }
+    const slicedBank = bank.slice(index + 1)
 
-    if (!max.second) {
-        console.log(+`${max.previousFirst}${max.previousSecond}`)
-        sum += +`${max.previousFirst}${max.previousSecond}`
-    }
-
-    console.log(+`${max.first}${max.second}`)
-    sum += +`${max.first}${max.second}`
+    const secondDigit = slicedBank[findIndexOfBiggestDigit(slicedBank, true)]
+    sum += +`${firstDigit}${secondDigit}`
 }
+
 
 console.log(sum)
