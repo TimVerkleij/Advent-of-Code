@@ -69,9 +69,9 @@ for (const [cell, boxes] of grid) {
             continue
         }
 
-        if (pairs.length >= 1000) {
-            break
-        }
+        // if (pairs.length >= 1000) {
+        //     break
+        // }
 
         pairs.push([currentBox, closestBox])
     }
@@ -79,6 +79,20 @@ for (const [cell, boxes] of grid) {
 
 }
 
+const groups: Set<string>[] = []
+
+for (const [box1, box2] of pairs) {
+    const stringifiedBox1 = `${box1.x},${box1.y},${box1.z}`
+    const stringifiedBox2 = `${box2.x},${box2.y},${box2.z}`
+
+    // groupIndexForBox1
+
+    for (let i = 0; i < groups.length; i++) {
+        const group = groups[i]
+
+    }
+
+}
 // Check duplicates
 // const list = pairs.map(([first, second]) => {
 //     const { x: x1, y: y1, z: z1 } = first
