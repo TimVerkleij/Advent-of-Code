@@ -21,6 +21,14 @@ input = `162,817,812
 984,92,344
 425,690,689`
 
+// input = `0,0,100
+// 100,0,0
+// 0,100,0
+// 0,200000,0
+// 100,200100,0
+// 100,200100,10
+// 0,200100,100`
+
 type Box = {
     x: number,
     y: number,
@@ -54,13 +62,12 @@ const calculateDistance = (box1: Box, box2: Box) => {
     return Math.sqrt((box1.x - box2.x) ** 2 + (box1.y - box2.y) ** 2 + (box1.z - box2.z) ** 2)
 }
 
-const pairs: [Box, Box][] = []
-
+const pairs: [Box, Box, number][] = []
 
 for (const [cell, boxes] of grid) {
     const [x, y, z] = cell.split(',')
 
-    const compareList = [...boxes]
+    const compareList: Box[] = []
 
     for (const dx of offsets) {
         for (const dy of offsets) {
@@ -97,23 +104,36 @@ for (const [cell, boxes] of grid) {
         //     break
         // }
 
-        pairs.push([currentBox, closestBox])
+        pairs.push([currentBox, closestBox, closestDistance])
     }
 
 
 }
 
+// console.log(pairs)
+
+pairs.sort((a, b) => a[2] - b[2])
+// console.log(pairs)
+
 const groups: Set<string>[] = []
 
-const maxConnections = 10
+const maxConnections = 1000
 let connectionCount = 0
 
-console.log(pairs)
+// console.log(pairs)
 
 for (const [box1, box2] of pairs) {
+    // console.log(`=======================`)
+    // console.log(groups)
+    // console.log(`-----------------------`)
+    // console.log(box1, box2)
+    // console.log(`=======================`)
     if (connectionCount === maxConnections) {
         break
     }
+
+    // connectionCount++
+
 
     const stringifiedBox1 = `${box1.x},${box1.y},${box1.z}`
     const stringifiedBox2 = `${box2.x},${box2.y},${box2.z}`
@@ -155,8 +175,13 @@ for (const [box1, box2] of pairs) {
 
     groups.push(group1.union(group2))
 
-    groups.splice(groupIndexForBox1, 1)
-    groups.splice(groupIndexForBox2, 1)
+    if (groupIndexForBox1 > groupIndexForBox2) {
+        groups.splice(groupIndexForBox1, 1)
+        groups.splice(groupIndexForBox2, 1)
+    } else {
+        groups.splice(groupIndexForBox2, 1)
+        groups.splice(groupIndexForBox1, 1)
+    }
     connectionCount++
 }
 
